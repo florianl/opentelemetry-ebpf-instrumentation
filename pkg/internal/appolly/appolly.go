@@ -153,7 +153,7 @@ func (i *Instrumenter) instrumentedEventLoop(ctx context.Context, processEvents 
 			log.Debug("running tracer for new process",
 				"inode", pt.FileInfo.Ino, "pid", pt.FileInfo.Pid, "exec", pt.FileInfo.CmdExePath)
 			if pt.Tracer != nil {
-				&{i tracersWg}.Go(func() {
+				i.tracersWg.Go(func() {
 					pt.Tracer.Run(ctx, i.ebpfEventContext, i.tracesInput)
 				})
 			}
